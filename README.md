@@ -1,7 +1,7 @@
 # Dev Web - Backend
 Repositório do código do backend da aplicação para a disciplina DevWeb.
 
-- [AAplicação - Frontend](https://github.com/Rickecr/dev-web-frontend)
+- [Aplicação - Frontend](https://github.com/Rickecr/dev-web-frontend)
 
 ## Sobre a aplicação:
 
