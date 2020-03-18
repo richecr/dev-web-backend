@@ -1,14 +1,29 @@
-const users = require('../../bd/users');
+// const users = require('../../database/users');
+const User = require('../models/User');
 
 let idController = 6
 
 class UsersController {
   async index(req, res) {
+    const users = await User.find({}, {
+      "_id": 0,
+      "name": 1,
+      "email": 2,
+      "ranking": 3,
+      "rating": 4,
+      "url_avatar": 5,
+      "occupation": 6,
+      "state": 7,
+      "city": 8,
+      "neighborhood": 9,
+      "price": 10,
+    });
+
     return res.json(users);
   }
 
   async store(req, res) {
-    const { 
+    const {
       name,
       email,
       password,
@@ -19,9 +34,8 @@ class UsersController {
       neighborhood,
       price } = req.body;
 
-    users.push({
+    const user = await User.create({
       name,
-      id: idController,
       email,
       password,
       url_avatar,
@@ -29,11 +43,8 @@ class UsersController {
       state,
       city,
       neighborhood,
-      price,
-    });
-
-    const user = users.find(user => user.id === idController);
-    idController++;
+      price
+    })
 
     return res.json(user);
   }
