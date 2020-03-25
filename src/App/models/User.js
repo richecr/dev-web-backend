@@ -9,19 +9,20 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
     required: true,
   },
-  ranking: {
-    type: Number,
-    default: 0,
+  phone: {
+    type: String,
+    required: true,
   },
-  rating: {
-    type: Number,
-    default: 0,
-  },
+  rating: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Evaluation',
+  }],
   url_avatar: {
     type: String,
   },
