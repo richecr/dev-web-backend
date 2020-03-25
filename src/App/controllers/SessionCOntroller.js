@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const users = require('../../bd/users');
+const users = require('../../database/users');
 
 class SessionController {
   async store(req, res) {
