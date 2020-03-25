@@ -38,6 +38,9 @@ class ServiceEvaluationController {
       note,
     });
 
+    user_provider.rating.push(evaluation);
+    await User.updateOne({ email: user_provider.email }, user_provider);
+
     return res.json(evaluation);
   }
 }

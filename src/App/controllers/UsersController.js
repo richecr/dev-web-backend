@@ -10,15 +10,26 @@ class UsersController {
       "name": 1,
       "email": 2,
       "phone": 3,
-      "ranking": 4,
-      "rating": 5,
-      "url_avatar": 6,
-      "occupation": 7,
-      "state": 8,
-      "city": 9,
-      "neighborhood": 10,
-      "price": 11,
-    });
+      "rating": 4,
+      "url_avatar": 5,
+      "occupation": 6,
+      "state": 7,
+      "city": 8,
+      "neighborhood": 9,
+      "price": 10,
+    })
+    .populate([
+      {
+        path: 'rating',
+        model: 'Evaluation',
+        select: '-_id -user_provider -__v',
+        populate: {
+          path: 'user_client',
+          model: 'User',
+          select: 'name email phone'
+        }
+      }
+    ]);
 
     return res.json(users);
   }

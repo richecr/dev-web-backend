@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const users = require('../../database/users');
+const bcryptjs = require('bcryptjs');
+const User = require('../models/User');
 
 class SessionController {
   async store(req, res) {
@@ -9,13 +10,15 @@ class SessionController {
       return res.status(400).json({ error: 'Email e password são obrigatórios!' });
     }
 
-    const user = users.find(user => user.email === email);
+    const user = await User.findOne({
+      email
+    });
 
     if (!user) {
       return res.status(400).json({ error: 'Email ou senha incorretos!' })
     }
 
-    if (user.password !== password) {
+    if (!(bcryptjs.compare(password, user.password))) {
       return res.status(400).json({ error: 'Email ou senha incorretos!' })
     }
 
