@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const EvaluationSchema = new mongoose.Schema({
   user_provider: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
   },
   note: {
     type: Number,
@@ -11,8 +11,8 @@ const EvaluationSchema = new mongoose.Schema({
   },
   user_client: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
+    ref: 'User',
+  },
 });
 
-module.exports = mongoose.model("Evaluation", EvaluationSchema);
+module.exports = mongoose.model('Evaluation', EvaluationSchema);

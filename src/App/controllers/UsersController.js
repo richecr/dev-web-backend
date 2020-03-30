@@ -1,24 +1,26 @@
 // const users = require('../../database/users');
 const User = require('../models/User');
 
-let idController = 6
+const idController = 6;
 
 class UsersController {
   async index(req, res) {
-    const users = await User.find({}, {
-      "_id": 0,
-      "name": 1,
-      "email": 2,
-      "phone": 3,
-      "rating": 4,
-      "url_avatar": 5,
-      "occupation": 6,
-      "state": 7,
-      "city": 8,
-      "neighborhood": 9,
-      "price": 10,
-    })
-    .populate([
+    const users = await User.find(
+      {},
+      {
+        _id: 0,
+        name: 1,
+        email: 2,
+        phone: 3,
+        rating: 4,
+        url_avatar: 5,
+        occupation: 6,
+        state: 7,
+        city: 8,
+        neighborhood: 9,
+        price: 10,
+      },
+    ).populate([
       {
         path: 'rating',
         model: 'Evaluation',
@@ -26,9 +28,9 @@ class UsersController {
         populate: {
           path: 'user_client',
           model: 'User',
-          select: 'name email phone'
-        }
-      }
+          select: 'name email phone',
+        },
+      },
     ]);
 
     return res.json(users);
@@ -45,7 +47,8 @@ class UsersController {
       state,
       city,
       neighborhood,
-      price } = req.body;
+      price,
+    } = req.body;
 
     const user = await User.create({
       name,
@@ -57,8 +60,8 @@ class UsersController {
       state,
       city,
       neighborhood,
-      price
-    })
+      price,
+    });
 
     return res.json(user);
   }

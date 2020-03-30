@@ -5,21 +5,23 @@ const User = require('../models/User');
 class SessionController {
   async store(req, res) {
     const { email, password } = req.body;
-    
+
     if (!(email || password)) {
-      return res.status(400).json({ error: 'Email e password são obrigatórios!' });
+      return res
+        .status(400)
+        .json({ error: 'Email e password são obrigatórios!' });
     }
 
     const user = await User.findOne({
-      email
+      email,
     });
 
     if (!user) {
-      return res.status(400).json({ error: 'Email ou senha incorretos!' })
+      return res.status(400).json({ error: 'Email ou senha incorretos!' });
     }
 
-    if (!(bcryptjs.compare(password, user.password))) {
-      return res.status(400).json({ error: 'Email ou senha incorretos!' })
+    if (!bcryptjs.compare(password, user.password)) {
+      return res.status(400).json({ error: 'Email ou senha incorretos!' });
     }
 
     const { id, name } = user;

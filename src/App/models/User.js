@@ -19,10 +19,12 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  rating: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Evaluation',
-  }],
+  rating: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Evaluation',
+    },
+  ],
   url_avatar: {
     type: String,
   },
@@ -46,10 +48,10 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-}).pre('save', async function(next) {
+}).pre('save', async function (next) {
   this.password = await bcryptjs.hash(this.password, 8);
 
   return next();
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model('User', UserSchema);

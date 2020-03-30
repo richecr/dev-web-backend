@@ -12,7 +12,10 @@ module.exports = async (req, res, next) => {
 
   try {
     // Transforma a função `jwt.verify` em uma promisse para usar async/await
-    const decoded = await promisify(jwt.verify)(token, 'c706a38d356b588477ff8a4f46c203f5');
+    const decoded = await promisify(jwt.verify)(
+      token,
+      'c706a38d356b588477ff8a4f46c203f5',
+    );
 
     req.userId = decoded.id;
 
